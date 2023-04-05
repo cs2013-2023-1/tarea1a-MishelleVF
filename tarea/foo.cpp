@@ -67,15 +67,13 @@ Matriz2D::Matriz2D(Matriz2D&& m){
 
 Matriz2D t(Matriz2D& m){
     // Transpuesta de una matriz
-    for(int i = 0; i < m.columnas; i++){
-        ptr[i] = new int[m.filas];
-    }
+    Matriz2D traspuesta(m.filas, m.columnas);
     for(int i = 0; i < m.columnas; i++){
         for(int j = 0; j < m.filas; j++){
-            ptr[i][j] = m[j][i];
+            traspuesta.ptr[i][j] = m[j][i];
         }
     }
-
+    return traspuesta;
 }
 
 std::ostream& operator<<(std::ostream& os, const Matriz2D& m){
@@ -91,15 +89,34 @@ std::ostream& operator<<(std::ostream& os, const Matriz2D& m){
 
 Matriz2D operator+(const Matriz2D& m1, const Matriz2D& m2){
     // Sobrecarga del operador +
-
+    Matriz2D suma(m1.filas, m1.columnas);
+    for (int i=0; i<m1.filas; i++){
+        for(int j=0; j<m1.columnas; j++){
+            suma[i][j] = m1[i][j] + m2[i][j];
+        }
+    }
+    return suma;
 }
 
 Matriz2D operator-(const Matriz2D& m1, const Matriz2D& m2){
     // Sobrecarga del operador -
+    Matriz2D resta(m1.filas, m1.columnas);
+    for(int i=0; i<m1.filas; i++){
+        for(int j=0; j<m1.columnas; j++){
+            resta.ptr[i][j] = m1[i][j] - m2[i][j];
+        }
+    }
+    return resta;
 }
 
 Matriz2D operator*(const Matriz2D& m1, const Matriz2D& m2){
     // Sobrecarga del operador *
+    Matriz2D multiplicacion(m1.filas, m1.columnas);
+    for(int i=0; i<m1.filas;i++){
+        for(int j=0; j<m1.columnas; j++){
+            multiplicacion[i][j] = m1[i][j] * m2[i][j];
+        }
+    }
 }
 
 Matriz2D operator+(const Matriz2D& m, float n){
