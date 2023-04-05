@@ -8,6 +8,7 @@ friend ostream& operator<<(ostream&, const Matriz2D&);
 friend Matriz2D operator+(const Matriz2D&, const Matriz2D&);
 friend Matriz2D operator-(const Matriz2D&, const Matriz2D&);
 friend Matriz2D operator*(const Matriz2D&, const Matriz2D&);
+
 friend Matriz2D operator+(const Matriz2D&, float);
 friend Matriz2D operator-(const Matriz2D&, float);
 friend Matriz2D operator*(const Matriz2D&, float);
