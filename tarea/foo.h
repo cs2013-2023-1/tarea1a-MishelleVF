@@ -14,7 +14,7 @@ friend Matriz2D operator-(const Matriz2D&, float);
 friend Matriz2D operator*(const Matriz2D&, float);
 friend Matriz2D operator/(const Matriz2D&, float);
 public:
-    Matriz2D(): filas(3), columnas(3);
+    Matriz2D();
     Matriz2D(int);
     Matriz2D(int, int);
     Matriz2D(const Matriz2D&);
