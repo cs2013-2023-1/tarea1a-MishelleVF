@@ -117,22 +117,51 @@ Matriz2D operator*(const Matriz2D& m1, const Matriz2D& m2){
             multiplicacion[i][j] = m1[i][j] * m2[i][j];
         }
     }
+    return multiplicacion;
 }
 
 Matriz2D operator+(const Matriz2D& m, float n){
     // Sobrecarga del operador +
+    Matriz2D sumaEntero(m.filas, m.columnas);
+    for(int i = 0; i<m.filas; i++){
+        for(int j=0; j<m.columnas; j++){
+            sumaEntero[i][j] = m[i][j] + n;
+        }
+    }
+    return sumaEntero;
 }
 
 Matriz2D operator-(const Matriz2D& m, float n){
     // Sobrecarga del operador -
+    Matriz2D restaEntero(m.filas, m.columnas);
+    for(int i = 0; i<m.filas; i++){
+        for(int j=0; j<m.columnas; j++){
+            restaEntero[i][j] = m[i][j] - n;
+        }
+    }
+    return restaEntero;
 }
 
 Matriz2D operator*(const Matriz2D& m, float n){
     // Sobrecarga del operador *
+    Matriz2D multiEntero(m.filas, m.columnas);
+    for(int i = 0; i<m.filas; i++){
+        for(int j=0; j<m.columnas; j++){
+            restaEntero[i][j] = m[i][j] * n;
+        }
+    }
+    return multiEntero;
 }
 
 Matriz2D operator/(const Matriz2D& m, float n){
     // Sobrecarga del operador /
+    Matriz2D diviEntero(m.filas, m.columnas);
+    for(int i = 0; i<m.filas; i++){
+        for(int j=0; j<m.columnas; j++){
+            restaEntero[i][j] = m[i][j] / n;
+        }
+    }
+    return diviEntero;
 
 }
 
