@@ -1,36 +1,36 @@
 #include "foo.h"
 
-Matriz2D::Matriz2D(): n(3), m(3) {
+Matriz2D::Matriz2D(): filas(3), columnas(3) {
     // Constructor por defecto
-    ptr = new int *[n];
-    for (int i = 0; i < n; i++) {
-        ptr[i] = new int[n];
+    ptr = new int *[getFilas()];
+    for (int i = 0; i < getFilas(); i++) {
+        ptr[i] = new int[getFilas()];
     }
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+    for (int i = 0; i < getFilas(); i++) {
+        for (int j = 0; j < getFilas(); j++) {
             ptr[i][j] = rand() % 1;
         }
     }
 }
 
-Matriz2D::Matriz2D(int n): n(n),m(n){
+Matriz2D::Matriz2D(int n): filas(n),columnas(n){
     // Constructor con un parametro
-    ptr = new int*[n];
-    for(int i = 0; i < n; i++){
-        ptr[i] = new int[n];
+    ptr = new int*[getFilas()];
+    for(int i = 0; i < getFilas(); i++){
+        ptr[i] = new int[getFilas()];
     }
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
+    for(int i = 0; i < getFilas(); i++){
+        for(int j = 0; j < getFilas(); j++){
             ptr[i][j] = rand() % 1;
         }
     }
 }
 
-Matriz2D::Matriz2D(int n, int m){
+Matriz2D::Matriz2D(int n, int m): filas(n), columnas(m){
     // Constructor con dos parametros
-    ptr = new int*[n];
-    for(int i = 0; i < n; i++){
-        ptr[i] = new int[m];
+    ptr = new int*[getFilas()];
+    for(int i = 0; i < getFilas(); i++){
+        ptr[i] = new int[getColumnas()];
     }
     for(int i = 0; i < n; i++){
         for(int j = 0; j < m; j++){
