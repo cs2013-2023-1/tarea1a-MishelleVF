@@ -1,6 +1,6 @@
 #include "foo.h"
 
-Matriz2D::Matriz2D(){
+Matriz2D::Matriz2D(): filas(3), columnas(3){
     // Constructor por defecto
     ptr = reinterpret_cast<float **>(new int *[getFilas()]);
     for (int i = 0; i < getFilas(); i++) {
@@ -11,7 +11,6 @@ Matriz2D::Matriz2D(){
             ptr[i][j] = rand() / static_cast<float>(RAND_MAX);
         }
     }
-
 }
 
 Matriz2D::Matriz2D(int n): filas(n), columnas(n){
@@ -45,11 +44,7 @@ Matriz2D::Matriz2D(const Matriz2D& m){
     this -> filas = m.filas;
     this -> columnas = m.columnas;
     ptr = reinterpret_cast<float **>(new int *[getFilas()]);
-    for(int i=0; i<m.filas; i++){
-        for(int j=0; j<m.columnas; j++){
-            ptr[i][j] = m.ptr[i][j];
-        }
-    }
+    ptr = m.ptr;
 }
 
 Matriz2D::Matriz2D(Matriz2D&& m){
@@ -65,7 +60,7 @@ Matriz2D t(Matriz2D& m){
     Matriz2D transpuesta(m.columnas, m.filas);
     for(int i=0; i<transpuesta.filas; i++){
         for(int j=0; j<transpuesta.columnas; j++){
-            transpuesta.ptr[i][j] = m.ptr[i][j];
+            transpuesta.ptr[i][j] = m.ptr[j][i];
         }
     }
     return transpuesta;
@@ -84,9 +79,9 @@ std::ostream& operator<<(std::ostream& os, const Matriz2D& m){
 
 Matriz2D operator+(const Matriz2D& m1, const Matriz2D& m2){
     // Sobrecarga del operador +
-    Matriz2D sumaMatriz(m1.filas, m1.filas);
+    Matriz2D sumaMatriz(m1.filas, m1.columnas);
     for(int i=0; i<m1.filas; i++){
-        for(int j=0; j<m1.filas; j++){
+        for(int j=0; j<m1.columnas; j++){
             sumaMatriz.ptr[i][j] = m1.ptr[i][j] + m2.ptr[i][j];
         }
     }
@@ -95,9 +90,9 @@ Matriz2D operator+(const Matriz2D& m1, const Matriz2D& m2){
 
 Matriz2D operator-(const Matriz2D& m1, const Matriz2D& m2){
     // Sobrecarga del operador -
-    Matriz2D restaMatriz(m1.filas, m1.filas);
+    Matriz2D restaMatriz(m1.filas, m1.columnas);
     for(int i=0; i<m1.filas; i++){
-        for(int j=0; j<m1.filas; j++){
+        for(int j=0; j<m1.columnas; j++){
             restaMatriz.ptr[i][j] = m1.ptr[i][j] - m2.ptr[i][j];
         }
     }
