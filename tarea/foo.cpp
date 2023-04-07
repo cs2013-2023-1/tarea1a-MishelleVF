@@ -54,12 +54,17 @@ Matriz2D::Matriz2D(const Matriz2D& m){
 
 Matriz2D::Matriz2D(Matriz2D&& m){
     // Constructor de movimiento
+
 }
 
 Matriz2D t(Matriz2D& m){
     // Transpuesta de una matriz
     Matriz2D transpuesta(m.columnas, m.filas);
-
+    for(int i=0; i<transpuesta.filas; i++){
+        for(int j=0; j<transpuesta.columnas; j++){
+            transpuesta.ptr[i][j] = m.ptr[i][j];
+        }
+    }
     return transpuesta;
 }
 
@@ -67,7 +72,7 @@ std::ostream& operator<<(std::ostream& os, const Matriz2D& m){
     // Sobrecarga del operador <<
     for (int i=0; i<m.filas; i++){
         for(int j=0; j<m.columnas; j++){
-            os << setprecision(2) << m.get(i,j) << " ";
+            os << m.ptr[i][j] << " ";
         }
         os << endl;
     }
@@ -76,19 +81,34 @@ std::ostream& operator<<(std::ostream& os, const Matriz2D& m){
 
 Matriz2D operator+(const Matriz2D& m1, const Matriz2D& m2){
     // Sobrecarga del operador +
-    Matriz2D sumaMatriz;
+    Matriz2D sumaMatriz(m1.filas, m1.filas);
+    for(int i=0; i<m1.filas; i++){
+        for(int j=0; j<m1.filas; j++){
+            sumaMatriz.ptr[i][j] = m1.ptr[i][j] + m2.ptr[i][j];
+        }
+    }
     return sumaMatriz;
 }
 
 Matriz2D operator-(const Matriz2D& m1, const Matriz2D& m2){
     // Sobrecarga del operador -
-    Matriz2D restaMatriz;
+    Matriz2D restaMatriz(m1.filas, m1.filas);
+    for(int i=0; i<m1.filas; i++){
+        for(int j=0; j<m1.filas; j++){
+            restaMatriz.ptr[i][j] = m1.ptr[i][j] - m2.ptr[i][j];
+        }
+    }
     return restaMatriz;
 }
 
 Matriz2D operator*(const Matriz2D& m1, const Matriz2D& m2){
     // Sobrecarga del operador *
-    Matriz2D multiMatriz;
+    Matriz2D multiMatriz(m1.filas, m2.columnas);
+    for(int i=0; i<m1.filas; i++){
+        for(int j=0; j<m1.filas; j++){
+            multiMatriz.ptr[i][j] = m1.ptr[i][j] * m2.ptr[i][j];
+        }
+    }
     return multiMatriz;
 }
 
@@ -97,7 +117,7 @@ Matriz2D operator+(const Matriz2D& m, float n){
     Matriz2D sumaEntero(m.filas, m.columnas);
     for(int i=0; i<m.filas; i++){
         for(int j=0; j<m.columnas; j++){
-            sumaEntero.ptr[i][j] = m.get(i,j) + n;
+            sumaEntero.ptr[i][j] = m.ptr[i][j] + n;
         }
     }
     return sumaEntero;
@@ -108,7 +128,7 @@ Matriz2D operator-(const Matriz2D& m, float n){
     Matriz2D restaEntero(m.filas, m.columnas);
     for(int i=0; i<m.filas; i++){
         for(int j=0; j<m.columnas; j++){
-            restaEntero.ptr[i][j] = m.get(i,j) - n;
+            restaEntero.ptr[i][j] = m.ptr[i][j] - n;
         }
     }
     return restaEntero;
@@ -119,7 +139,7 @@ Matriz2D operator*(const Matriz2D& m, float n){
     Matriz2D multiEntero(m.filas, m.columnas);
     for(int i=0; i<m.filas; i++){
         for(int j=0; j<m.columnas; j++){
-            multiEntero.ptr[i][j] = m.get(i,j) * n;
+            multiEntero.ptr[i][j] = m.ptr[i][j] * n;
         }
     }
     return multiEntero;
@@ -130,7 +150,7 @@ Matriz2D operator/(const Matriz2D& m, float n){
     Matriz2D diviEntero(m.filas, m.columnas);
     for(int i=0; i<m.filas; i++){
         for(int j=0; j<m.columnas; j++){
-            diviEntero.ptr[i][j] = m.get(i,j) / n;
+            diviEntero.ptr[i][j] = m.ptr[i][j] / n;
         }
     }
     return diviEntero;
@@ -147,4 +167,3 @@ int Matriz2D::getFilas(){
 int Matriz2D::getColumnas(){
     return columnas;
 }
-
