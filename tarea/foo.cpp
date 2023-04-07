@@ -1,7 +1,6 @@
-
 #include "foo.h"
 
-Matriz2D::Matriz2D(): filas(3), columnas(3) {
+Matriz2D::Matriz2D(){
     // Constructor por defecto
     ptr = reinterpret_cast<float **>(new int *[getFilas()]);
     for (int i = 0; i < getFilas(); i++) {
@@ -12,9 +11,10 @@ Matriz2D::Matriz2D(): filas(3), columnas(3) {
             ptr[i][j] = rand() / static_cast<float>(RAND_MAX);
         }
     }
+
 }
 
-Matriz2D::Matriz2D(int n): filas(n),columnas(n){
+Matriz2D::Matriz2D(int n): filas(n), columnas(n){
     // Constructor con un parametro
     ptr = reinterpret_cast<float **>(new int *[getFilas()]);
     for (int i = 0; i < getFilas(); i++) {
@@ -42,11 +42,11 @@ Matriz2D::Matriz2D(int n, int m): filas(n), columnas(m){
 
 Matriz2D::Matriz2D(const Matriz2D& m){
     // Constructor de copia
-    this-> filas = m.filas;
-    this-> columnas = m.columnas;
-    ptr = reinterpret_cast<float **>(new int[getFilas()]);
-    for(int i=0; i < getFilas(); i++){
-        for(int j=0; j < getColumnas(); j++){
+    this -> filas = m.filas;
+    this -> columnas = m.columnas;
+    ptr = reinterpret_cast<float **>(new int *[getFilas()]);
+    for(int i=0; i<m.filas; i++){
+        for(int j=0; j<m.columnas; j++){
             ptr[i][j] = m.ptr[i][j];
         }
     }
@@ -54,7 +54,10 @@ Matriz2D::Matriz2D(const Matriz2D& m){
 
 Matriz2D::Matriz2D(Matriz2D&& m){
     // Constructor de movimiento
-
+    this -> filas = m.filas;
+    this -> columnas = m.columnas;
+    ptr = m.ptr;
+    m.ptr = nullptr;
 }
 
 Matriz2D t(Matriz2D& m){
@@ -156,7 +159,7 @@ Matriz2D operator/(const Matriz2D& m, float n){
     return diviEntero;
 }
 
-float Matriz2D::get(int i, int j) const {
+float Matriz2D::get(int i, int j){
     return ptr[i][j];
 }
 
