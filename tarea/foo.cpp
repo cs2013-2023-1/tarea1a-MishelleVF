@@ -102,9 +102,13 @@ Matriz2D operator-(const Matriz2D& m1, const Matriz2D& m2){
 Matriz2D operator*(const Matriz2D& m1, const Matriz2D& m2){
     // Sobrecarga del operador *
     Matriz2D multiMatriz(m1.filas, m2.columnas);
-    for(int i=0; i<m1.filas; i++){
-        for(int j=0; j<m1.filas; j++){
-            multiMatriz.ptr[i][j] = m1.ptr[i][j] * m2.ptr[i][j];
+    for(int k=0; k<multiMatriz.filas; k++){
+        for(int i=0; i<multiMatriz.columnas; i++){
+            int suma = 0;
+            for(int j=0; j<m1.columnas; j++){
+                suma = suma + (m1.ptr[k][j] * m2.ptr[j][k]);
+            }
+            multiMatriz.ptr[k][i] = suma;
         }
     }
     return multiMatriz;
